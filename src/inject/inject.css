@@ -1,3 +1,22 @@
 /**
  * Place your custom CSS styles here.
  **/
+
+
+
+.file-type {
+	opacity: 0.5;
+}
+.file-type.selected{
+	opacity: 1 !important;
+}
+.file-type .octicon-eye-watch {
+	display: none !important;
+}
+
+.file-type.selected .octicon-x{
+	display: none !important;
+}
+.file-type.selected .octicon-eye-watch{
+	display: table-cell !important;
+}

@@ -4,7 +4,7 @@ $(document).ready(function(){
         $toc = $('#toc');
         $toc.find('.content li>a').each(function () {
             ext_str_full = $(this).text().trim().split('.');
-            if (ext_str_full.length && ext_str_full != "") {
+            if (ext_str_full.length  && ext_str_full != "") {
                 ext_str = ext_str_full[ext_str_full.length - 1];
                 if(typeof extensions[ext_str] == 'undefined'){
                     extension = extensions[ext_str] = {};
@@ -21,32 +21,32 @@ $(document).ready(function(){
 
 
 
-        $modal = $('<div id="filter-menu" class="select-menu js-menu-container js-select-menu is-showing-clear-item right-aligned" data-multiple style="margin-right: 10px">\n\n      <span class="minibutton select-menu-button js-menu-target">\n        <span class="octicon octicon-search"></span>\n        Filtered file types: (<span class="filtered-string">0</span>)\n        <!--<span class="js-select-button">simple</span>-->\n      </span>\n\n    <div class="select-menu-modal-holder js-menu-content js-navigation-container" style="top:25px">\n        <div class="select-menu-modal">\n            <div class="select-menu-header">\n                <span class="select-menu-title">Choose file types to filter out</span>\n                <span class="octicon octicon-x js-menu-close"></span>\n            </div>\n            \n            <div class="select-menu-filters">\n                <div class="select-menu-text-filter">\n                    <input type="text" id="text-filter-field" class="js-filterable-field js-navigation-enable"\n                           placeholder="Filter file extensions">\n                </div>\n            </div>\n\n            <div class="select-menu-list">\n                <div class="extensions-to-remove" data-filterable-for="text-filter-field" data-filterable-type="substring">\n\n                    \n                </div>\n\n                <div class="select-menu-no-results">Nothing to show</div>\n            </div>\n\n            <div class="select-menu-footer js-menu-close">\n                <span class="octicon octicon-check"></span>\n                <a id="clear-all-filters" href="#">Clear filters</a>\n            </div>\n        </div>\n        <!-- /.select-menu-modal -->\n    </div>\n    <!-- /.select-menu-modal-holder -->\n</div>')
+        $modal = $('<div id="filter-menu" class="select-menu js-menu-container js-select-menu is-showing-clear-item right-aligned" data-multiple style="margin-right: 10px">\n\n      <span class="minibutton select-menu-button js-menu-target">\n        <span class="octicon octicon-search"></span>\n        Visible file types: (<span class="filtered-string">0</span>)\n        <!--<span class="js-select-button">simple</span>-->\n      </span>\n\n    <div class="select-menu-modal-holder js-menu-content js-navigation-container" style="top:25px">\n        <div class="select-menu-modal">\n            <div class="select-menu-header">\n                <span class="select-menu-title">Toggle appearance of file type</span>\n                <span class="octicon octicon-x js-menu-close"></span>\n            </div>\n            \n            <div class="select-menu-filters">\n                <div class="select-menu-text-filter">\n                    <input type="text" id="text-filter-field" class="js-filterable-field js-navigation-enable"\n                           placeholder="Filter file extensions">\n                </div>\n            </div>\n\n            <div class="select-menu-list">\n                <div class="extensions-to-remove" data-filterable-for="text-filter-field" data-filterable-type="substring">\n\n                    \n                </div>\n\n                <div class="select-menu-no-results">Nothing to show</div>\n            </div>\n\n            <div class="select-menu-footer js-menu-close">\n                <span class="octicon octicon-check"></span>\n                <a id="clear-all-filters" href="#">Show all file types</a>\n            </div>\n        </div>\n        <!-- /.select-menu-modal -->\n    </div>\n    <!-- /.select-menu-modal-holder -->\n</div>')
 
-        $tmpl = $('<div class="select-menu-item js-navigation-item">\n    <span class="select-menu-item-icon octicon octicon-x"></span>\n    <div class="select-menu-item-text">\n        <h4 class="js-select-button-text"></h4>\n        <span class="description">Hide all diffs with file extension <b></b></span>\n    </div>\n</div>');
+        $tmpl = $('<div class="select-menu-item js-navigation-item file-type">\n    <span class="select-menu-item-icon octicon octicon-eye-watch"></span>\n    <span class="select-menu-item-icon octicon octicon-x"></span>\n    <div class="select-menu-item-text">\n        <h4 class="js-select-button-text"></h4>\n        <span class="description">Hide show <b></b> files</span>\n    </div>\n</div>');
 
-        $.each(Object.keys(extensions),function(){
+        $.each(Object.keys(extensions),function(k,v){
             $new_tmpl = $tmpl.clone();
-            $new_tmpl.find('.js-select-button-text, .description>b').text('.' + this);
-            $modal.find('.extensions-to-remove').append($new_tmpl)
+            $new_tmpl.find('.js-select-button-text, .description>b').text('.' + v);
+            $modal.find('.extensions-to-remove').append($new_tmpl);
+            if(!extensions[v]["hidden"]){
+                $new_tmpl.addClass('selected');
+            }
+
         });
 
         $toc.find('.explain').append($modal);
 
-        $("#filter-menu").find(".select-menu-item").each(function(){
-            if(extensions[$(this).find('.js-select-button-text').text().trim().substr(1)]["hidden"]){
-                $(this).addClass('selected');
-            }
-        });
+
         $("#filter-menu").find(".select-menu-item").on('click',function(){
             setTimeout(function () {
                 exts = $("#filter-menu").find(".select-menu-item");
                 $.each(exts, function () {
                     curr_ext_str = $(this).find('.js-select-button-text').text().trim();
                     if($(this).hasClass('selected')){
-                        extensions[curr_ext_str.substr(1)]["hidden"] = true
-                    }else{
                         extensions[curr_ext_str.substr(1)]["hidden"] = false
+                    }else{
+                        extensions[curr_ext_str.substr(1)]["hidden"] = true
                     }
 
                 });
@@ -58,13 +58,13 @@ $(document).ready(function(){
         $('#clear-all-filters').on('click',function(e){
             e.preventDefault();
             window.exts_arr = [];
-            $("#filter-menu").find(".select-menu-item").removeClass('selected');
+            $("#filter-menu").find(".select-menu-item").addClass('selected');
             $.each(extensions,function(k){
                 extensions[k]["hidden"] = false;
             });
             hide_filtered_diffs();
         })
-    }
+
 
     var hide_filtered_diffs = function () {
         $('.filter-notice').remove();
@@ -86,23 +86,24 @@ $(document).ready(function(){
             }else{
                 $files
                     .css('opacity', 1).find('.data').removeClass('hidden');
-                $links.css('opacity', 1).append($hidden_by_filter);
+                $links.css('opacity', 1);
             }
         });
 
-        $('.filtered-string').text(hidden_extension_length);
+        $('.filtered-string').text(Object.keys(extensions).length - hidden_extension_length);
 
         if(hidden_length > 0){
             $toc.find('.explain>strong').eq(0).text((files_length - hidden_length) + ' changed files ('+ hidden_length+ ' hidden by filter)')
             ls_set(location.pathname, extensions);
         }else{
-            $toc.find('.explain>strong').eq(0).text(files_length + ' changed files')
+            $toc.find('.explain>strong').eq(0).text(files_length + ' changed files');
             ls_set(location.pathname, null);
         }
 
     };
 
     hide_filtered_diffs();
+    }
 });
 
 

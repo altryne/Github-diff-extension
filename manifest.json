@@ -1,8 +1,8 @@
 {
   "name": "Github diff helper",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "manifest_version": 2,
-  "description": "WHen you have too many files in one github diff, this extension helps you filter out the noise",
+  "description": "When you have too many files in one github diff, this extension helps you filter out the noise",
   "homepage_url": "http://extensionizr.com",
   "icons": {
     "16": "icons/icon16.png",
@@ -22,7 +22,7 @@
   "content_scripts": [
     {
       "matches": [
-        "https://github.com/*/*/pull/*/files"
+        "https://github.com/*"
       ],
       "css": [
         "src/inject/inject.css"
