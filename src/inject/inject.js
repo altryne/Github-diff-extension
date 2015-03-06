@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    if($('.show-diff-stats').length){
+    if($('.toc-diff-stats').length){
         window.extensions = ls_get(location.pathname) || {};
         $toc = $('#toc');
         $toc.find('.content li>a').each(function () {
@@ -21,7 +21,7 @@ $(document).ready(function(){
 
 
 
-        $modal = $('<div id="filter-menu" class="select-menu js-menu-container js-select-menu is-showing-clear-item right-aligned" data-multiple style="margin-right: 10px">\n\n      <span class="minibutton select-menu-button js-menu-target">\n        <span class="octicon octicon-search"></span>\n        Visible file types: (<span class="filtered-string">0</span>)\n        <!--<span class="js-select-button">simple</span>-->\n      </span>\n\n    <div class="select-menu-modal-holder js-menu-content js-navigation-container" style="top:25px">\n        <div class="select-menu-modal">\n            <div class="select-menu-header">\n                <span class="select-menu-title">Toggle appearance of file type</span>\n                <span class="octicon octicon-x js-menu-close"></span>\n            </div>\n            \n            <div class="select-menu-filters">\n                <div class="select-menu-text-filter">\n                    <input type="text" id="text-filter-field" class="js-filterable-field js-navigation-enable"\n                           placeholder="Filter file extensions">\n                </div>\n            </div>\n\n            <div class="select-menu-list">\n                <div class="extensions-to-remove" data-filterable-for="text-filter-field" data-filterable-type="substring">\n\n                    \n                </div>\n\n                <div class="select-menu-no-results">Nothing to show</div>\n            </div>\n\n            <div class="select-menu-footer js-menu-close">\n                <span class="octicon octicon-check"></span>\n                <a id="clear-all-filters" href="#">Show all file types</a>\n            </div>\n        </div>\n        <!-- /.select-menu-modal -->\n    </div>\n    <!-- /.select-menu-modal-holder -->\n</div>')
+        $modal = $('<div id="filter-menu" class="select-menu js-menu-container js-select-menu is-showing-clear-item left" data-multiple style="position:relative;margin-right: 10px">\n\n      <span class="minibutton select-menu-button js-menu-target">\n        <span class="octicon octicon-search"></span>\n        Visible file types: (<span class="filtered-string">0</span>)\n        <!--<span class="js-select-button">simple</span>-->\n      </span>\n\n    <div class="select-menu-modal-holder js-menu-content js-navigation-container" style="top:25px">\n        <div class="select-menu-modal">\n            <div class="select-menu-header">\n                <span class="select-menu-title">Toggle appearance of file type</span>\n                <span class="octicon octicon-x js-menu-close"></span>\n            </div>\n            \n            <div class="select-menu-filters">\n                <div class="select-menu-text-filter">\n                    <input type="text" id="text-filter-field" class="js-filterable-field js-navigation-enable"\n                           placeholder="Filter file extensions">\n                </div>\n            </div>\n\n            <div class="select-menu-list">\n                <div class="extensions-to-remove" data-filterable-for="text-filter-field" data-filterable-type="substring">\n\n                    \n                </div>\n\n                <div class="select-menu-no-results">Nothing to show</div>\n            </div>\n\n            <div class="select-menu-footer js-menu-close">\n                <span class="octicon octicon-check"></span>\n                <a id="clear-all-filters" href="#">Show all file types</a>\n            </div>\n        </div>\n        <!-- /.select-menu-modal -->\n    </div>\n    <!-- /.select-menu-modal-holder -->\n</div>')
 
         $tmpl = $('<div class="select-menu-item js-navigation-item file-type">\n    <span class="select-menu-item-icon octicon octicon-eye-watch"></span>\n    <span class="select-menu-item-icon octicon octicon-x"></span>\n    <div class="select-menu-item-text">\n        <h4 class="js-select-button-text"></h4>\n        <span class="description">Hide show <b></b> files</span>\n    </div>\n</div>');
 
@@ -34,8 +34,7 @@ $(document).ready(function(){
             }
 
         });
-
-        $toc.find('.explain').append($modal);
+        $toc.find('.button-group').prepend($modal);
 
 
         $("#filter-menu").find(".select-menu-item").on('click',function(){
