@@ -20,3 +20,37 @@
 .file-type.selected .octicon-eye-watch{
 	display: table-cell !important;
 }
+#filter-menu .octicon{
+	margin-left: 0;
+	margin-top: 0;
+	float: none;
+}
+
+.toggle-state-btn .octicon-triangle-down{
+	display: none;
+}
+
+#filter-menu .select-menu-header .octicon{
+	float: right;
+	margin-top: 5px;
+}
+.diff-helper-hidden{
+	opacity: 0.4;
+}
+.diff-helper-hidden .data{
+	height: 0;
+}
+
+.diff-helper-hidden .toggle-state-btn .octicon-triangle-down {
+	display: inline-block;
+}
+.diff-helper-hidden .toggle-state-btn .octicon-triangle-up {
+	display: none;
+}
+
+.show_hide_btn_cont::before{
+	content: "Hide diff"
+}
+.diff-helper-hidden .show_hide_btn_cont::before{
+	content: "Show diff"
+}

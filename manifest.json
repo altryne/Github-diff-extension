@@ -1,6 +1,6 @@
 {
   "name": "Github diff helper",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "manifest_version": 2,
   "description": "When you have too many files in one github diff, this extension helps you filter out the noise",
   "homepage_url": "http://extensionizr.com",
@@ -8,13 +8,6 @@
     "16": "icons/icon16.png",
     "48": "icons/icon128.png",
     "128": "icons/icon128.png"
-  },
-
-  "background": {
-    "scripts": [
-      "src/bg/background.js"
-    ],
-    "persistent": false
   },
   "permissions": [
     "https://github.com/*", "tabs"
