@@ -15,11 +15,10 @@ $(document).ready(function(){
 });
 
 inject_diff_helpers = function(){
-  if ($('.toc-diff-stats').length) {
+  if ($('.diffbar').length) {
     window.extensions = ls_get(location.pathname) || {};
-    $toc = $('#toc');
-    $toc.find('.content li>a').each(function () {
-      ext_str_full = $(this).text().trim().split('.');
+    $('div#files > div.file').each(function () {
+      ext_str_full = $(this).children('div.file-header').attr('data-path').trim().split('.');
       if (ext_str_full.length && ext_str_full != "") {
         ext_str = ext_str_full[ext_str_full.length - 1];
         if (typeof extensions[ext_str] == 'undefined') {
@@ -34,7 +33,7 @@ inject_diff_helpers = function(){
         $(this).attr('data-extension', ext_str);
         //put the data-extension on the file diff itself
         //file diffs, don't have ID's, but they do have links with the same name before them
-        $('[name=' + $(this).attr('href').substr(1) + ']').next().attr('data-extension', ext_str);
+        $(this).prev().attr('data-extension', ext_str);
       }
     });
 
@@ -52,7 +51,10 @@ inject_diff_helpers = function(){
       }
 
     });
-    $toc.find('.btn-group').prepend($modal);
+
+    var $toc = $('div.diffbar');
+
+    $modal.insertAfter($toc.find('.toc-select'));
 
 
     $("#filter-menu").find(".select-menu-item").on('click', function () {
