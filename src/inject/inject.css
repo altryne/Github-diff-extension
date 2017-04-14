@@ -20,20 +20,29 @@
 .file-type.selected .octicon-eye-watch{
 	display: table-cell !important;
 }
-#filter-menu .octicon{
-	margin-left: 0;
-	margin-top: 0;
-	float: none;
+
+#filter-menu .select-menu-footer{
+  height: 40px;
+      line-height: 17px;
+      text-indent: 35px;
+      padding-top: 10px;
+}
+
+.diffbar #filter-menu .select-menu-button{
+  background: none ;
+  border: none;
+  color: #767676;
+  box-shadow: none;
+}
+.diffbar #filter-menu .select-menu-button:hover{
+  color:#4078c0;
 }
 
 .toggle-state-btn .octicon-triangle-down{
 	display: none;
 }
 
-#filter-menu .select-menu-header .octicon{
-	float: right;
-	margin-top: 5px;
-}
+
 .diff-helper-hidden{
 	opacity: 0.4;
 }

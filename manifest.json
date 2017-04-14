@@ -1,6 +1,6 @@
 {
   "name": "Github diff helper",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "manifest_version": 2,
   "description": "When you have too many files in one github diff, this extension helps you filter out the noise",
   "homepage_url": "http://extensionizr.com",
@@ -27,6 +27,7 @@
       ],
       "js": [
           "js/jquery/dist/jquery.min.js",
+          "js/underscore.min.js",
           "src/inject/inject.js"
 
       ],
